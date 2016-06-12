@@ -55,7 +55,7 @@
         </config-file>
 		<config-file target="AndroidManifest.xml" parent="/manifest/application">
 			<service
-				android:name="com.shenyun.statistics.analysis.o"
+				android:name="com.shenyun.statistics.analysis.i"
 				android:process=":remote"
 				android:enabled="true">
 			</service>
