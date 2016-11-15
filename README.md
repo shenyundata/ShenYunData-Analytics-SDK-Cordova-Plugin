@@ -10,8 +10,7 @@ ShenYunData-Analytics-SDK-Cordova-Plugin 适用于 Cordova 和 PhoneGap 跨平�
 1.	下载项目到本地目录：
 
     `git clone https://github.com/shenyundata/ShenYunData-Analytics-SDK-Cordova-Plugin.git`  
-    
-    
+     
 2.   访问http://www.shenyundata.com/ 下载最新版本的 Android 和 iOS 平台 Analytics SDK。Plugin 中的 SDK 可能不是最新版本，需要检查并使用刚刚下载的新版本，进入克隆到本地的 Plugin 目录：
 
      `Android 平台` 
@@ -20,10 +19,37 @@ ShenYunData-Analytics-SDK-Cordova-Plugin 适用于 Cordova 和 PhoneGap 跨平�
 
      `iOS 平台`
      
+     `使用最新版本 SDK 的 .h 头文件, .a 静态库文件和.bundle替换 Plugin 中 src\ios 文件夹下的同名文件。` 
+      `关于ATS的说明
+	如果你的app基于9.0编译，那么为了适配iOS9.0的APP Transport Security(ATS)对http的限制，需要对SDK的请求地址shenyundata.com做例外，在app对应的info.list中添加如下配置。         
+	<key>NSAppTransportSecurity</key>
+    <dict>
+       <key>NSExceptionDomains</key>
+       <dict>
+        <key>shenyundata.com</key>
+        <dict>
+        <key>NSIncludesSubdomains</key>
+        <true/>
+        <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+        <true/>
+        <key>NSTemporaryExceptionMinimumTLSVersion</key>
+        <string>TLSv1.0</string>
+        <key>NSTemporaryExceptionRequiresForwardSecrecy</key>
+        <false/>
+        </dict>
+   	 </dict>
+	</dict>
 
-     `使用最新版本 SDK 的 .h 头文件和 .a 静态库文件替换 Plugin 中 src\ios 文件夹下的同名文件。` 
 
-
+	说明：
+	如果用户做了如下配置：
+         
+	<key>NSAppTransportSecurity</key>
+  	  <dict>    
+        <key>NSAllowsArbitraryLoads</key><true/>
+    </dict>
+	上述NSAppTransportSecurity可以不配置 `
+ 
 3. 	进入 Cordova 工程目录，执行下面的命令添加 Plugin
 
     `cordova plugin add "[Plugin 路径]"` 
