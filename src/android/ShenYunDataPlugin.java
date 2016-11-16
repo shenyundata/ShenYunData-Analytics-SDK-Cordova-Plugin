@@ -69,6 +69,8 @@ public class ShenYunDataPlugin extends CordovaPlugin {
             ShenYunCordovaStatistics.onPause(activity, args.getString(0));
         } else if (action.equals("onEvent")) {
             ShenYunCordovaStatistics.onEvent(activity, args.getString(0), args.getString(1), args.getString(2), args.getString(3));
+        } else if (action.equals("setUserId")) {
+            ShenYunCordovaStatistics.setUserId(activity, args.getString(0));
         } else {
             return false;
         }

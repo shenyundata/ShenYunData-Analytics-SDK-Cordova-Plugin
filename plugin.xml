@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" 
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="ShenYunData" 
-        version="1.0.2">
+        version="1.0.3">
     
     <name>ShenYunData</name>
     
@@ -17,6 +17,7 @@
         <source-file src="src/ios/ShenYunDataPlugin.m" />
         <header-file src="src/ios/ShenYun_StatisticsSDK.h" />
         <source-file src="src/ios/libShenYun_Statistics_iOS.a" framework="true" />
+        <resource-file src="src/ios/ShenYun_StatisticsSDK.bundle" />
         
         <config-file target="config.xml" parent="/widget/plugins">
             <feature name="ShenYunData">

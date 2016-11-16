@@ -8,14 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-
 typedef void (^ShenYun_SuccessBlock)(id responseObject);
 typedef void (^ShenYun_FailureBlock)(NSError *error);
 
 ///---------------------------------------------------------------------------------------
 /// @name  页面事件种类
 ///---------------------------------------------------------------------------------------
-
 
 typedef enum ShenYun_EventAction {
     ACTION_REGISTER = 0,
@@ -58,14 +56,18 @@ typedef enum ShenYun_EventStatus {
  */
 + (id)startWithAppKey:(NSString *)appkey channel:(NSString *)channel subChannel:(NSString *)subChannel;
 
+/**
+ 使用方法:默认
+ @param isEnable 设置SDK地理位置是否开启，YES为开启，NO为关闭(如无调用,默认为开启)
+ @return void
+ */
++ (void)lbsLocationEnable:(BOOL)isEnable;
+
 /** 设置SDK工作模式
- 使用方法:设置测试(YES)与生产环境(NO)两种(默认为NO),设置为测试模式，数据会上传到数据测试平台,设置为生产模式，数据会上传到生产环境数据平台
  @param debug 设置SDK工作模式，YES为测试模式，NO为生产模式(如无调用,默认为生产模式)
  @return void
  */
-
 + (void)setDevMode:(BOOL)debug;
-
 
 
 ///---------------------------------------------------------------------------------------
@@ -88,61 +90,68 @@ typedef enum ShenYun_EventStatus {
  */
 + (void)endLogPageView:(NSString *)pageName;
 
-/** 不带参数数组的页面事件统计.
- @param userId
- @param action
- @param status
- @param success
- @param userId
- @return failure.
- */
-+ (void)eventWithUserId:(NSString *)userId eventId:(ShenYun_EventAction)action eventStatus:(ShenYun_EventStatus)status success:(ShenYun_SuccessBlock)success failure:(ShenYun_FailureBlock)failure;
-
 ///---------------------------------------------------------------------------------------
 /// @name
 ///---------------------------------------------------------------------------------------
-/** 带参数数组的页面事件统计
- @param userId
- @param action
- @param status
- @param paramsList
+/** 事件统计
+ @param userId  用户id
+ @param action  事件id
+ @param status  事件状态
+ @param parameter nil为不带参数
  @param success
- @param userId
  @return failure.
  */
 + (void)eventWithUserId:(NSString *)userId eventId:(ShenYun_EventAction)action eventStatus:(ShenYun_EventStatus)status parameter:(NSDictionary *)parameter success:(ShenYun_SuccessBlock)success failure:(ShenYun_FailureBlock)failure;
 
-/** 单次上传多个事件，可带参数数组或不带参数数组
- @param userId
- @param events
+/** 事件统计--带地理位置及其他基本信息
+ @param userId  用户id
+ @param action  事件id
+ @param status  事件状态
+ @param parameter   nil为不带参数
+ @param hasLocation  yes为带位置信息
+ @param success
+ @return failure.
+ */
++ (void)eventWithUserId:(NSString *)userId eventId:(ShenYun_EventAction)action eventStatus:(ShenYun_EventStatus)status parameter:(NSDictionary *)parameter hasLocation:(BOOL)enable success:(ShenYun_SuccessBlock)success failure:(ShenYun_FailureBlock)failure;
+
+
+/** 多事件接口
+ @param userId  用户id
+ @param events  多事件数组
  @param success
  @param failure
  */
 + (void)eventWithUserId:(NSString *)userId events:(NSArray *)events success:(ShenYun_SuccessBlock)success failure:(ShenYun_FailureBlock)failure;
 
-
-// 自定义事件
-/** 自定义事件：不带参数数组的页面事件统计.
- @param userId
- @param customAction
- @param status
+/** 多事件接口--带地理位置及其他基本信息
+ @param userId  用户id
+ @param events  多事件数组
+ @param hasLocation  yes为带位置信息
  @param success
- @param userId
- @return failure.
+ @param failure
  */
-+(void)customEventWithUserId:(NSString *)userId customEventAction:(NSString *)customAction eventStatus:(ShenYun_EventStatus)status success:(ShenYun_SuccessBlock)success failure:(ShenYun_FailureBlock)failure;
++ (void)eventWithUserId:(NSString *)userId events:(NSArray *)events hasLocation:(BOOL)enable success:(ShenYun_SuccessBlock)success failure:(ShenYun_FailureBlock)failure;
 
-//
-/** 自定义事件: 带参数数组的页面事件统计
- @param userId
- @param customAction
- @param status
- @param paramsList
+/** 自定义事件
+ @param userId  用户id
+ @param customAction   事件id
+ @param status  事件状态
+ @param parameter  nil为不带参数
  @param success
- @param userId
  @return failure.
  */
 + (void)customEventWithUserId:(NSString *)userId customEventAction:(NSString *)customAction eventStatus:(ShenYun_EventStatus)status parameter:(NSDictionary *)parameter success:(ShenYun_SuccessBlock)success failure:(ShenYun_FailureBlock)failure;
+
+/** 自定义事件--带地理位置及其他基本信息
+ @param userId  用户id
+ @param customAction   事件id
+ @param status  事件状态
+ @param parameter  nil为不带参数
+ @param hasLocation  yes为带位置信息
+ @param success
+ @return failure.
+ */
++ (void)customEventWithUserId:(NSString *)userId customEventAction:(NSString *)customAction eventStatus:(ShenYun_EventStatus)status parameter:(NSDictionary *)parameter hasLocation:(BOOL)enable success:(ShenYun_SuccessBlock)success failure:(ShenYun_FailureBlock)failure;
 
 
 
